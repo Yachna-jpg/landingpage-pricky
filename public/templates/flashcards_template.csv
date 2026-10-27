@@ -1,0 +1,62 @@
+subject_code,subject_name,deck_title,deck_description,deck_color,chapter_name,topic_name,question,answer,hint,keywords,sort_order
+0417,Information and Communication Technology,Unit 1: Types and components of computer systems,"Hardware, software, processor architectures, and device form factors.",#06B0FF,1.1 Hardware and software,System software vs Application software,Define system software and explain its primary role in computer operations.,"System software manages hardware devices, provides an execution platform for applications, and handles internal system operations.
+Examples include:
+1. Operating systems (e.g. Windows, Linux)
+2. Device drivers
+3. Utility programs (e.g. disk defragmenter, antivirus)
+4. Translators (compilers, interpreters)",Think of it as the foundational layer between physical silicon and user applications.,"operating system, hardware management, device drivers, utilities, platform",1
+0417,Information and Communication Technology,Unit 1: Types and components of computer systems,"Hardware, software, processor architectures, and device form factors.",#06B0FF,1.1 Hardware and software,Central Processing Unit (CPU),What occurs during the Fetch-Decode-Execute (FDE) cycle of the CPU?,"1. Fetch: The Program Counter (PC) holds the memory address of the next instruction; CPU fetches the instruction from RAM via the data bus into CIR.
+2. Decode: The Control Unit (CU) interprets the opcode to determine required actions.
+3. Execute: The instruction is carried out (e.g. mathematical calculation in ALU or data transfer), and PC increments.","Three distinct sequential steps: Fetch, Decode, Execute.","program counter, ALU, control unit, memory address, opcode, registers",2
+0417,Information and Communication Technology,Unit 2: Input and output devices,"Sensory hardware, barcode, RFID, OMR, and high-precision display devices.",#80D107,2.1 Input devices,RFID vs Barcode Scanners,State three operational advantages of Radio Frequency Identification (RFID) over traditional barcode systems in warehouse inventory tracking.,"1. Non-line-of-sight reading: RFID tags can be scanned through packaging and pallets without direct optical alignment.
+2. Bulk reading capability: Hundreds of RFID tags can be identified simultaneously in seconds.
+3. Read/Write flexibility: Data on RFID chips can be dynamically updated in transit.
+4. Durability: RFID tags withstand harsh, dirty, or damp environments better than paper barcodes.",Focus on line-of-sight and bulk read capabilities.,"line-of-sight, bulk scanning, read/write, RFID chip, warehouse automation",3
+0417,Information and Communication Technology,Unit 3: Storage devices and media,"Magnetic, optical, solid-state drives, durability, latency and capacity.",#FE80AF,3.1 Storage media,Solid State Drives (SSD) vs Hard Disk Drives (HDD),Why are Solid State Drives preferred over Hard Disk Drives in modern mobile computers?,"1. No moving mechanical parts: SSDs have high shock resistance and will not suffer read/write head crashes when dropped.
+2. Significantly faster read/write speeds: Near-zero seek latency enables faster boot times and file access.
+3. Lower power consumption: Generates less heat and prolongs portable battery life.
+4. Silent operation: Completely noiseless compared to spinning platters.",Consider mechanical durability and latency.,"flash memory, NAND gates, seek time, latency, shock resistance, power efficiency",4
+0580,Mathematics,Chapter 1: Number & Sequences,"Prime numbers, factors, surds, indices, and standard form representation.",#8B5CF6,1.1 Number properties,Prime Factorisation and HCF / LCM,How do you find the Highest Common Factor (HCF) and Lowest Common Multiple (LCM) of two numbers using their prime factor trees?,"1. Express both numbers as products of their prime factors (e.g. in index form).
+2. HCF: Multiply the lowest power of each common prime factor.
+3. LCM: Multiply the highest power of all prime factors appearing in either number.",HCF takes smallest powers of shared primes; LCM takes largest powers of all primes.,"prime factorisation, index form, HCF, LCM, venn diagram",1
+0580,Mathematics,Chapter 2: Algebra & Quadratic Equations,"Solving quadratic formulas, completing the square, and algebraic fractions.",#8B5CF6,2.1 Quadratic equations,Quadratic Formula & Discriminant,State the quadratic formula for solving $ax^2 + bx + c = 0$ and describe how the discriminant determines the nature of roots.,"The quadratic formula is:
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+The discriminant is $\Delta = b^2 - 4ac$:
+- If $\Delta > 0$: Two distinct real roots.
+- If $\Delta = 0$: One repeated (equal) real root.
+- If $\Delta < 0$: No real roots (complex roots).",Formula: -b +/- sqrt(b^2 - 4ac) over 2a. The term under the square root is the discriminant.,"quadratic formula, discriminant, roots, completing the square, parabola",2
+0580,Mathematics,Chapter 3: Trigonometry & Bearings,"Right-angled trigonometry, Sine rule, Cosine rule, and 3-figure navigation bearings.",#8B5CF6,3.1 Non-right-angled triangles,Sine Rule and Cosine Rule,When should you apply the Sine Rule versus the Cosine Rule in non-right-angled triangle geometry?,"1. Sine Rule ($\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$):
+- Use when you know an angle and its opposite side, plus one other angle or side.
+
+2. Cosine Rule ($a^2 = b^2 + c^2 - 2bc \cos A$):
+- Use when you know 2 sides and the included angle (SAS) to find the 3rd side.
+- Use when you know all 3 sides (SSS) to calculate any angle ($\cos A = \frac{b^2 + c^2 - a^2}{2bc}$).",SAS or SSS = Cosine Rule. Angle-side opposite pair = Sine Rule.,"sine rule, cosine rule, included angle, bearings, non-right-angled",3
+0610,Biology,Unit 1: Cell structure and organisation,"Specialised plant and animal cells, organelle functions, and magnification formulas.",#10B981,1.1 Cell structures,Plant Cells vs Animal Cells,"List three cellular structures found in plant cells that are absent from animal cells, with the function of each.","1. Cellulose Cell Wall: Provides rigid structural support and prevents osmotic bursting (lysis).
+2. Large Permanent Vacuole: Contains cell sap to maintain turgor pressure against the cell wall.
+3. Chloroplasts: Contain chlorophyll pigments to absorb light energy for photosynthesis.","Remember: Cell wall, chloroplast, and permanent central vacuole.","cellulose, cell wall, chloroplast, chlorophyll, turgor pressure, permanent vacuole",1
+0610,Biology,Unit 2: Movement in and out of cells,"Diffusion, osmosis, active transport, and water potential gradients.",#10B981,2.1 Transport mechanisms,Osmosis and Water Potential,Define osmosis in precise Cambridge IGCSE examination terms.,"Osmosis is the net movement of water molecules from a region of higher water potential (dilute solution) to a region of lower water potential (concentrated solution), down a water potential gradient, through a partially permeable membrane.","Must include: water molecules, water potential, down gradient, partially permeable membrane.","water potential, osmosis, partially permeable, solute concentration, turgor",2
+0610,Biology,Unit 3: Enzymes and biological catalysts,"Enzyme structure, active sites, lock-and-key model, denaturation by heat and pH.",#10B981,3.1 Enzyme action,Enzyme Denaturation,Explain what happens to an enzyme when the temperature increases significantly beyond its optimum.,"1. Excessive kinetic energy causes hydrogen and ionic bonds stabilizing the tertiary protein structure to vibrate and break.
+2. The shape of the active site changes irreversibly (denaturation).
+3. The substrate molecule is no longer complementary to the active site, preventing substrate-enzyme complexes from forming, reducing the rate of reaction to zero.","Never say 'enzymes die'—enzymes are proteins, they denature because the active site loses its complementary shape.","active site, denaturation, substrate, complementary, tertiary structure, optimum",3
+0625,Physics,"Unit 1: Motion, forces and energy","Kinematics, velocity-time graphs, Newton's laws of motion, and work-energy theorem.",#F59E0B,1.1 Kinematics,Velocity-Time Graphs,State how acceleration and distance travelled are determined from a velocity-time graph.,"1. Acceleration is given by the gradient (slope) of the line:
+$$\text{Acceleration } a = \frac{\Delta v}{\Delta t}$$
+
+2. Distance travelled is represented by the total area under the velocity-time graph line (split into rectangles and triangles).",Gradient = Acceleration. Area under curve = Total distance travelled.,"velocity-time, gradient, acceleration, displacement, area under graph",1
+0625,Physics,"Unit 1: Motion, forces and energy","Kinematics, velocity-time graphs, Newton's laws of motion, and work-energy theorem.",#F59E0B,1.2 Dynamics and forces,Newton's Three Laws of Motion,State Newton's First and Second Laws of Motion in formal physical terms.,"1. Newton's First Law (Inertia): An object remains at rest or continues at constant velocity in a straight line unless acted upon by a resultant external force.
+
+2. Newton's Second Law: Resultant force is directly proportional to the rate of change of momentum, expressed as:
+$$F = ma$$
+where $F$ is resultant force (N), $m$ is mass (kg), and $a$ is acceleration ($m/s^2$).",First Law = Balanced forces (zero acceleration). Second Law = F = m * a.,"resultant force, inertia, acceleration, mass, momentum, newton",2
+0455,Economics,Unit 1: The basic economic problem,"Scarcity, choice, opportunity cost, and the four factors of production.",#EC4899,1.1 Factors of production,Four Factors of Production and Their Rewards,Name the four factors of production and state the economic return (reward) earned by each.,"1. Land: Natural resources (minerals, water, arable soil) -> Reward: Rent
+2. Labour: Human physical and mental effort expended in production -> Reward: Wages / Salaries
+3. Capital: Man-made goods used to produce other goods (machinery, factories, computers) -> Reward: Interest
+4. Enterprise: The skill of organizing the other three factors and bearing financial business risk -> Reward: Profit","Acronym: CELL (Capital, Enterprise, Land, Labour) with rewards: Interest, Profit, Rent, Wages.","land, labour, capital, enterprise, rent, wages, interest, profit, opportunity cost",1
+0455,Economics,Unit 2: The allocation of resources,"Demand and supply curves, equilibrium price, price elasticity of demand (PED).",#EC4899,2.1 Elasticity,Price Elasticity of Demand (PED),Define Price Elasticity of Demand (PED) and state the formula used to calculate it.,"Price Elasticity of Demand (PED) measures the responsiveness of quantity demanded to a percentage change in price of that product.
+
+Formula:
+$$\text{PED} = \frac{\% \text{ change in Quantity Demanded}}{\% \text{ change in Price}}$$
+
+Interpretation:
+- If $|\text{PED}| > 1$: Demand is Price Elastic (sensitive to price).
+- If $|\text{PED}| < 1$: Demand is Price Inelastic (necessities, addictive goods).",Percentage change in quantity demanded divided by percentage change in price.,"PED, price elasticity, quantity demanded, revenue, elasticity of demand",2

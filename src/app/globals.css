@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind utilities;
+
+:root {
+  /* Typography */
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Editorial Minimal Palette */
+  --bg-canvas: #faf9f5;
+  /* Warm editorial ivory */
+  --bg-surface: #ffffff;
+  --bg-subtle: #f4f3ee;
+  --bg-hover: #eeece5;
+
+  --text-main: #141413;
+  --text-muted: #575653;
+  --text-subtle: #878682;
+  --text-accent: #0284c7;
+
+  /* Line work & Hairstyle borders */
+  --border-hairline: rgba(20, 20, 19, 0.08);
+  --border-medium: rgba(20, 20, 19, 0.15);
+  --border-dark: #141413;
+
+  /* Accent Tones */
+  --accent-ink: #141413;
+  --accent-blue: #0284c7;
+  --accent-blue-subtle: #f0f7fb;
+  --accent-green: #15803d;
+  --accent-green-subtle: #f2f9f4;
+
+  /* Shadcn standard tokens */
+  --background: var(--bg-canvas);
+  --foreground: var(--text-main);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-main);
+  --muted: var(--bg-subtle);
+  --muted-foreground: var(--text-muted);
+  --border: var(--border-hairline);
+  --ring: var(--text-main);
+
+  /* Subtle Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+
+  /* Shadows - Minimal and soft, no heavy glows */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.03), 0 10px 24px -8px rgba(0, 0, 0, 0.04);
+  --shadow-float: 0 16px 36px -10px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+/* Base utility text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+p {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.section-spacing {
+  padding: 104px 0;
+}
+
+/* Minimal Editorial Buttons */
+.btn-minimal-dark {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background-color: var(--text-main);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--text-main);
+}
+
+.btn-minimal-dark:hover {
+  background-color: #2b2a28;
+  border-color: #2b2a28;
+  transform: translateY(-1px);
+}
+
+.btn-minimal-outline {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background-color: transparent;
+  color: var(--text-main);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-medium);
+  transition: all 0.2s ease;
+}
+
+.btn-minimal-outline:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+/* Minimal pill badges */
+.eyebrow-tag {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow-tag::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+}
+
+/* Section Header Typography */
+.editorial-title {
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  line-height: 1.16;
+}
+
+.editorial-title em {
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.editorial-sub {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 660px;
+  margin-top: 14px;
+}
+
+/* Minimal hairline cards */
+.editorial-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  border-color: rgba(20, 20, 19, 0.18);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-spacing {
+    padding: 68px 0;
+  }
+
+  .editorial-title {
+    font-size: 32px;
+  }
+
+  .editorial-sub {
+    font-size: 17px;
+  }
+}

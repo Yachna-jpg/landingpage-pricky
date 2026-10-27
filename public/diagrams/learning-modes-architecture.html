@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrickyAi · Learning Modes & Data Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f7f7f9;
+      --color-ink:     #1e293b;
+      --color-muted:   #64748b;
+      --color-accent:  #dc2626;
+      --color-navy:    #2563eb;
+      --color-amber:   #d97706;
+      --color-sage:    #16a34a;
+      --color-purple:  #7c3aed;
+      --font-sans:     'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif:    'Instrument Serif', Georgia, serif;
+      --font-mono:     'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .frame {
+      max-width: 1240px;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 2.8vw + 0.8rem, 2.85rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.45;
+    }
+
+    .diagram-container {
+      width: 100%;
+      overflow-x: auto;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px -2px rgba(15, 23, 42, 0.06);
+      padding: 1.5rem;
+    }
+
+    svg {
+      width: 100%;
+      min-width: 1140px;
+      display: block;
+    }
+
+    @media print {
+      .diagram-container { overflow-x: visible; box-shadow: none; border: none; padding: 0; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">PRICKYAI · ENGINE &amp; DATA FLOW ARCHITECTURE</p>
+    <h1>The Three Learning Modes &amp; Neon DB Synchronization</h1>
+    <p class="subtitle">Complete technical blueprint of Mode 1 (Practice Session), Mode 2 (Adaptive Flow), Mode 3 (Custom Paper Creation), and the home screen cell-wise matrix tracking.</p>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1140 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="learning-modes-diagram-title learning-modes-diagram-desc">
+        <title id="learning-modes-diagram-title">PrickyAi Learning Engines &amp; Data Flow Architecture</title>
+        <desc id="learning-modes-diagram-desc">Architectural diagram illustrating the 3 testing and practice modes, Next.js API routing dispatchers, Neon PostgreSQL storage tier, and the home screen cell-wise topic matrix progress synchronization.</desc>
+
+        <defs>
+          <marker id="arrow-navy" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2563eb"/></marker>
+          <marker id="arrow-amber" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#d97706"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#dc2626"/></marker>
+          <marker id="arrow-sage" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#16a34a"/></marker>
+          <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7c3aed"/></marker>
+          <marker id="arrow-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#64748b"/></marker>
+
+          <!-- Soft drop shadow -->
+          <filter id="shadow" x="-3%" y="-3%" width="106%" height="108%" filterUnits="userSpaceOnUse">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.05" />
+          </filter>
+        </defs>
+
+        <!-- Canvas Background -->
+        <rect width="100%" height="100%" fill="#ffffff"/>
+
+        <!-- ========================================================================================= -->
+        <!-- CONNECTORS / DATA FLOW ARROWS                                                             -->
+        <!-- ========================================================================================= -->
+
+        <!-- Mode 1 -> /api/questions -->
+        <path d="M 330 135 L 410 135" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-navy)"/>
+        
+        <!-- Mode 1 -> /api/attempts/topic-practice/mark -->
+        <path d="M 330 205 L 410 205" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-navy)"/>
+
+        <!-- Mode 2 -> /api/flow/next -->
+        <path d="M 330 335 L 410 335" fill="none" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)"/>
+
+        <!-- Mode 3 -> /api/tests -->
+        <path d="M 330 500 L 410 500" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-accent)"/>
+
+        <!-- Mode 3 -> /api/attempts (Runner) -->
+        <path d="M 330 560 L 370 560 L 370 415 L 410 415" fill="none" stroke="#dc2626" stroke-width="1.75" marker-end="url(#arrow-accent)"/>
+
+        <!-- API Engine -> Neon PostgreSQL DB -->
+        <!-- Questions query -->
+        <path d="M 700 135 L 780 135" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-sage)"/>
+        
+        <!-- Attempts / Progress write -->
+        <path d="M 700 220 L 740 220 L 740 205 L 780 205" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-sage)"/>
+        
+        <!-- Tests write -->
+        <path d="M 700 415 L 740 415 L 740 245 L 780 245" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-sage)"/>
+
+        <!-- /api/progress -> Home Topic Matrix -->
+        <path d="M 700 457 L 780 457" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+
+        <!-- Arrow Labels with Opaque Backdrops -->
+        <g font-family="var(--font-mono)" font-size="9.5" font-weight="600">
+          <!-- Mode 1 Fetch -->
+          <rect x="340" y="125" width="60" height="18" rx="4" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+          <text x="370" y="138" fill="#2563eb" text-anchor="middle">fetch Qs</text>
+
+          <!-- Mode 1 Rubric Mark -->
+          <rect x="338" y="195" width="64" height="18" rx="4" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+          <text x="370" y="208" fill="#2563eb" text-anchor="middle">AI mark</text>
+
+          <!-- Mode 2 Stream -->
+          <rect x="338" y="325" width="64" height="18" rx="4" fill="#ffffff" stroke="#fde68a" stroke-width="1"/>
+          <text x="370" y="338" fill="#d97706" text-anchor="middle">adaptive</text>
+
+          <!-- Mode 3 Create -->
+          <rect x="340" y="490" width="60" height="18" rx="4" fill="#ffffff" stroke="#fecaca" stroke-width="1"/>
+          <text x="370" y="503" fill="#dc2626" text-anchor="middle">seed test</text>
+
+          <!-- DB read/write -->
+          <rect x="714" y="125" width="54" height="18" rx="4" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="741" y="138" fill="#16a34a" text-anchor="middle">read Qs</text>
+
+          <rect x="712" y="195" width="58" height="18" rx="4" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="741" y="208" fill="#16a34a" text-anchor="middle">commit</text>
+
+          <!-- Progress Sync -->
+          <rect x="714" y="447" width="52" height="18" rx="4" fill="#ffffff" stroke="#e9d5ff" stroke-width="1"/>
+          <text x="740" y="460" fill="#7c3aed" text-anchor="middle">sync UI</text>
+        </g>
+
+        <!-- ========================================================================================= -->
+        <!-- ZONE 1: THE THREE LEARNING & ASSESSMENT MODES                                             -->
+        <!-- ========================================================================================= -->
+
+        <text x="30" y="45" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.1em">1. CLIENT LEARNING &amp; TEST RUNNERS</text>
+
+        <!-- MODE 1 CARD -->
+        <g id="node-mode1" filter="url(#shadow)">
+          <rect x="30" y="60" width="300" height="185" rx="12" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+          <rect x="30" y="60" width="300" height="34" rx="12" fill="#eff6ff"/>
+          <rect x="30" y="80" width="300" height="14" fill="#eff6ff"/>
+          
+          <text x="44" y="83" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#1e3a8a">MODE 1: PRACTICE SESSION</text>
+          <rect x="226" y="68" width="94" height="18" rx="9" fill="#2563eb"/>
+          <text x="273" y="81" font-family="var(--font-mono)" font-size="8.5" font-weight="600" fill="#ffffff" text-anchor="middle">DUAL RUNNER</text>
+
+          <text x="44" y="114" font-family="var(--font-sans)" font-size="12" font-weight="600" fill="#1e293b">• Topic Practice (Untimed, Normal)</text>
+          <text x="56" y="130" font-family="var(--font-sans)" font-size="11" fill="#475569">Component: <tspan font-family="var(--font-mono)" fill="#1d4ed8">TopicPracticeView.tsx</tspan></text>
+          <text x="56" y="146" font-family="var(--font-sans)" font-size="11" fill="#475569">Instant AI marking per subpart via Cambridge criteria</text>
+
+          <text x="44" y="174" font-family="var(--font-sans)" font-size="12" font-weight="600" fill="#1e293b">• Listed Past Papers (Timed Exam)</text>
+          <text x="56" y="190" font-family="var(--font-sans)" font-size="11" fill="#475569">Component: <tspan font-family="var(--font-mono)" fill="#1d4ed8">RunnerShell.tsx</tspan> (0417_m20_qp_12)</text>
+          <text x="56" y="206" font-family="var(--font-sans)" font-size="11" fill="#475569">Authoritative 45–120m timer, soft anti-cheat lock</text>
+          <text x="56" y="222" font-family="var(--font-sans)" font-size="11" fill="#475569">Whole paper evaluated and submitted at end</text>
+        </g>
+
+        <!-- MODE 2 CARD -->
+        <g id="node-mode2" filter="url(#shadow)">
+          <rect x="30" y="260" width="300" height="175" rx="12" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+          <rect x="30" y="260" width="300" height="34" rx="12" fill="#fffbeb"/>
+          <rect x="30" y="280" width="300" height="14" fill="#fffbeb"/>
+
+          <text x="44" y="283" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#92400e">MODE 2: FLOW ENGINE</text>
+          <rect x="226" y="268" width="94" height="18" rx="9" fill="#d97706"/>
+          <text x="273" y="281" font-family="var(--font-mono)" font-size="8.5" font-weight="600" fill="#ffffff" text-anchor="middle">UNTIMED STREAM</text>
+
+          <text x="44" y="314" font-family="var(--font-sans)" font-size="12" font-weight="600" fill="#1e293b">• Continuous Adaptive Practice Loop</text>
+          <text x="56" y="330" font-family="var(--font-sans)" font-size="11" fill="#475569">Component: <tspan font-family="var(--font-mono)" fill="#b45309">FlowRunner.tsx</tspan></text>
+          <text x="56" y="348" font-family="var(--font-sans)" font-size="11" fill="#475569">3-Tier Fallback Question Picker:</text>
+          <text x="66" y="364" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">1. Priority Chapters (1.5x boost from modal)</text>
+          <text x="66" y="379" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">2. Admin Sequence (syllabus order &amp; weight)</text>
+          <text x="66" y="394" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">3. Whole Subject Pool (all unpracticed Qs)</text>
+          <text x="56" y="414" font-family="var(--font-sans)" font-size="11" fill="#475569">Untimed flow state with streak multipliers</text>
+        </g>
+
+        <!-- MODE 3 CARD -->
+        <g id="node-mode3" filter="url(#shadow)">
+          <rect x="30" y="450" width="300" height="175" rx="12" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+          <rect x="30" y="450" width="300" height="34" rx="12" fill="#fef2f2"/>
+          <rect x="30" y="470" width="300" height="14" fill="#fef2f2"/>
+
+          <text x="44" y="473" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#991b1b">MODE 3: CREATE PAPER</text>
+          <rect x="226" y="458" width="94" height="18" rx="9" fill="#dc2626"/>
+          <text x="273" y="471" font-family="var(--font-mono)" font-size="8.5" font-weight="600" fill="#ffffff" text-anchor="middle">TIMED MOCK</text>
+
+          <text x="44" y="504" font-family="var(--font-sans)" font-size="12" font-weight="600" fill="#1e293b">• Custom Exam Builder &amp; Simulator</text>
+          <text x="56" y="520" font-family="var(--font-sans)" font-size="11" fill="#475569">Modal: <tspan font-family="var(--font-mono)" fill="#b91c1c">CreatePaperWizardModal.tsx</tspan></text>
+          <text x="56" y="538" font-family="var(--font-sans)" font-size="11" fill="#475569">Student configures mock parameters:</text>
+          <text x="66" y="554" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">• Pick topics, formats (MCQ/Open), question count</text>
+          <text x="66" y="569" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">• Difficulty tiers: Easy / Medium / Hard / Essay</text>
+          <text x="66" y="584" font-family="var(--font-sans)" font-size="10.5" fill="#64748b">• Seeded Gumbel-Top-K sampling persisted in DB</text>
+          <text x="56" y="604" font-family="var(--font-sans)" font-size="11" fill="#475569">Strictly Timed (1 mark = 1 min), Full Anti-Cheat</text>
+        </g>
+
+        <!-- ========================================================================================= -->
+        <!-- ZONE 2: NEXT.JS SERVER & API DISPATCH TIER                                               -->
+        <!-- ========================================================================================= -->
+
+        <text x="420" y="45" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.1em">2. NEXT.JS API ROUTING &amp; DISPATCH</text>
+
+        <g id="node-api-engine" filter="url(#shadow)">
+          <rect x="420" y="60" width="280" height="565" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+          <rect x="420" y="60" width="280" height="34" rx="12" fill="#f8fafc"/>
+          <rect x="420" y="80" width="280" height="14" fill="#f8fafc"/>
+          <text x="434" y="83" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#0f172a">API ROUTERS &amp; SERVICES</text>
+
+          <!-- API Row 1: /api/questions -->
+          <g transform="translate(434, 105)">
+            <rect width="252" height="64" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#0f172a">GET /api/questions</text>
+            <text x="10" y="34" font-family="var(--font-sans)" font-size="10" fill="#475569">Params: subjectId, topicId, paperId, difficulty</text>
+            <text x="10" y="50" font-family="var(--font-sans)" font-size="10" fill="#64748b">Groups subparts (a, b) · Safe projection</text>
+          </g>
+
+          <!-- API Row 2: /api/attempts/topic-practice/mark -->
+          <g transform="translate(434, 178)">
+            <rect width="252" height="72" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#1d4ed8">POST /api/attempts/.../mark</text>
+            <text x="10" y="33" font-family="var(--font-sans)" font-size="10" font-weight="600" fill="#1e3a8a">Real-time Cambridge AI Rubric Engine</text>
+            <text x="10" y="47" font-family="var(--font-sans)" font-size="10" fill="#475569">Evaluates student text against syllabus criteria</text>
+            <text x="10" y="61" font-family="var(--font-sans)" font-size="10" fill="#475569">Awards marks + immediately triggers progress update</text>
+          </g>
+
+          <!-- API Row 3: /api/flow/next -->
+          <g transform="translate(434, 259)">
+            <rect width="252" height="72" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#b45309">POST /api/flow/next</text>
+            <text x="10" y="33" font-family="var(--font-sans)" font-size="10" font-weight="600" fill="#78350f">Adaptive Question Picker Service</text>
+            <text x="10" y="47" font-family="var(--font-sans)" font-size="10" fill="#475569">Reads mastery state from PostgreSQL</text>
+            <text x="10" y="61" font-family="var(--font-sans)" font-size="10" fill="#475569">Serves next optimal question with zero repeat</text>
+          </g>
+
+          <!-- API Row 4: /api/tests & /api/attempts -->
+          <g transform="translate(434, 340)">
+            <rect width="252" height="72" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#b91c1c">POST /api/tests &amp; /api/attempts</text>
+            <text x="10" y="33" font-family="var(--font-sans)" font-size="10" font-weight="600" fill="#7f1d1d">Custom Exam Builder &amp; Anti-Cheat Monitor</text>
+            <text x="10" y="47" font-family="var(--font-sans)" font-size="10" fill="#475569">Tracks focus blur, tab switch, fullscreen exit</text>
+            <text x="10" y="61" font-family="var(--font-sans)" font-size="10" fill="#475569">Persists test definition &amp; attempt logs</text>
+          </g>
+
+          <!-- API Row 5: /api/progress -->
+          <g transform="translate(434, 421)">
+            <rect width="252" height="72" rx="8" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#7c3aed">GET &amp; POST /api/progress</text>
+            <text x="10" y="33" font-family="var(--font-sans)" font-size="10" font-weight="600" fill="#581c87">Mastery &amp; Coverage Sync Engine</text>
+            <text x="10" y="47" font-family="var(--font-sans)" font-size="10" fill="#475569">Computes: attempted, correct, mastery tier</text>
+            <text x="10" y="61" font-family="var(--font-sans)" font-size="10" fill="#475569">Directly drives home matrix cell states</text>
+          </g>
+
+          <!-- API Row 6: Universal Multi-Subject -->
+          <g transform="translate(434, 502)">
+            <rect width="252" height="58" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+            <text x="10" y="18" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#15803d">Universal Multi-Subject Router</text>
+            <text x="10" y="33" font-family="var(--font-sans)" font-size="10" fill="#475569">Dynamic: 0417 (ICT), 0478 (CS), 0610 (Bio)...</text>
+            <text x="10" y="47" font-family="var(--font-sans)" font-size="10" fill="#475569">Accepts subjectId universally across all routes</text>
+          </g>
+        </g>
+
+        <!-- ========================================================================================= -->
+        <!-- ZONE 3: NEON POSTGRESQL PRODUCTION DATA TIER                                             -->
+        <!-- ========================================================================================= -->
+
+        <text x="780" y="45" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.1em">3. NEON POSTGRESQL PERSISTENCE</text>
+
+        <g id="node-neon-db" filter="url(#shadow)">
+          <rect x="780" y="60" width="330" height="250" rx="12" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+          <rect x="780" y="60" width="330" height="34" rx="12" fill="#f0fdf4"/>
+          <rect x="780" y="80" width="330" height="14" fill="#f0fdf4"/>
+
+          <text x="794" y="83" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#166534">NEON POSTGRESQL DATA STORE</text>
+          <rect x="1010" y="68" width="88" height="18" rx="9" fill="#16a34a"/>
+          <text x="1054" y="81" font-family="var(--font-mono)" font-size="8.5" font-weight="600" fill="#ffffff" text-anchor="middle">LIVE CLUSTER</text>
+
+          <g transform="translate(794, 102)" font-family="var(--font-mono)" font-size="10">
+            <rect width="302" height="24" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+            <text x="10" y="16" fill="#0f172a" font-weight="600">questions</text>
+            <text x="292" y="16" fill="#64748b" text-anchor="end">519 diagram Qs, subparts</text>
+
+            <rect y="29" width="302" height="24" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+            <text x="10" y="45" fill="#0f172a" font-weight="600">papers</text>
+            <text x="292" y="45" fill="#64748b" text-anchor="end">Cambridge Catalog (0417...)</text>
+
+            <rect y="58" width="302" height="24" rx="5" fill="#f8fafc" stroke="#e2e8f0"/>
+            <text x="10" y="74" fill="#0f172a" font-weight="600">subjects, units, topics</text>
+            <text x="292" y="74" fill="#64748b" text-anchor="end">Syllabus tree</text>
+
+            <rect y="87" width="302" height="24" rx="5" fill="#eff6ff" stroke="#bfdbfe"/>
+            <text x="10" y="103" fill="#1e40af" font-weight="600">user_progress</text>
+            <text x="292" y="103" fill="#1e3a8a" text-anchor="end">attempted, correct, tier</text>
+
+            <rect y="116" width="302" height="24" rx="5" fill="#fef2f2" stroke="#fecaca"/>
+            <text x="10" y="132" fill="#991b1b" font-weight="600">tests &amp; test_attempts</text>
+            <text x="292" y="132" fill="#7f1d1d" text-anchor="end">Custom exam records</text>
+
+            <rect y="145" width="302" height="42" rx="5" fill="#fefce8" stroke="#fef08a"/>
+            <text x="10" y="161" fill="#854d0e" font-weight="600">Option C Cleanup State:</text>
+            <text x="10" y="176" font-family="var(--font-sans)" font-size="9.5" fill="#713f12">Zero verification collages; genuine diagrams only</text>
+          </g>
+        </g>
+
+        <!-- ========================================================================================= -->
+        <!-- ZONE 4: HOME SCREEN CELL-WISE TOPIC MATRIX & 1/20 MASTERY RING                            -->
+        <!-- ========================================================================================= -->
+
+        <text x="780" y="348" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.1em">4. HOME SCREEN MATRIX SYNCHRONIZATION</text>
+
+        <g id="node-matrix-sync" filter="url(#shadow)">
+          <rect x="780" y="365" width="330" height="260" rx="12" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+          <rect x="780" y="365" width="330" height="34" rx="12" fill="#faf5ff"/>
+          <rect x="780" y="385" width="330" height="14" fill="#faf5ff"/>
+
+          <text x="794" y="388" font-family="var(--font-sans)" font-size="13" font-weight="700" fill="#581c87">TOPIC MATRIX (TopicMatrix.tsx)</text>
+          <rect x="1018" y="373" width="80" height="18" rx="9" fill="#7c3aed"/>
+          <text x="1058" y="386" font-family="var(--font-mono)" font-size="8.5" font-weight="600" fill="#ffffff" text-anchor="middle">REAL-TIME</text>
+
+          <!-- Matrix Cell Mapping Details -->
+          <text x="794" y="420" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="#0f172a">• Grid Structure:</text>
+          <text x="806" y="435" font-family="var(--font-sans)" font-size="10.5" fill="#475569">Columns = Syllabus Units (Unit 1 to Unit 6+)</text>
+          <text x="806" y="450" font-family="var(--font-sans)" font-size="10.5" fill="#475569">Cells = Individual Topics/Lessons (1.1, 1.2, 1.3...)</text>
+
+          <!-- The Authentic 1/20 + Mastery Ring Display -->
+          <g transform="translate(794, 464)">
+            <rect width="302" height="60" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+            
+            <text x="12" y="24" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="#0f172a">Topic Progress Badge:</text>
+            <text x="12" y="42" font-family="var(--font-mono)" font-size="10" fill="#64748b">user_progress sync</text>
+
+            <!-- 1/20 Text -->
+            <text x="210" y="38" font-family="var(--font-sans)" font-size="20" font-weight="600" fill="#1e293b" text-anchor="end">1/20</text>
+
+            <!-- Authentic 4-Segment Rounded Square Mastery Ring -->
+            <g transform="translate(225, 14)">
+              <!-- Segment 0: Top-Right (Active Amber/Yellow from user image) -->
+              <path d="M 16 4 Q 28 4 28 16" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+              <!-- Segment 1: Bottom-Right (Light Gray) -->
+              <path d="M 28 20 Q 28 32 16 32" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+              <!-- Segment 2: Bottom-Left (Light Gray) -->
+              <path d="M 12 32 Q 0 32 0 20" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+              <!-- Segment 3: Top-Left (Light Gray) -->
+              <path d="M 0 16 Q 0 4 12 4" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+              <!-- Rounded Center Dot -->
+              <rect x="9" y="13" width="10" height="10" rx="3" fill="#f1f5f9"/>
+            </g>
+          </g>
+
+          <!-- Cell-wise color tiers -->
+          <g transform="translate(794, 536)" font-family="var(--font-sans)" font-size="10">
+            <text x="0" y="14" font-weight="600" fill="#0f172a">Cell Tiers:</text>
+            <circle cx="65" cy="11" r="5" fill="#f1f5f9" stroke="#cbd5e1"/>
+            <text x="74" y="14" fill="#64748b">None (0)</text>
+
+            <circle cx="130" cy="11" r="5" fill="#fef08a" stroke="#eab308"/>
+            <text x="139" y="14" fill="#a16207">Low (1-2)</text>
+
+            <circle cx="195" cy="11" r="5" fill="#fde68a" stroke="#d97706"/>
+            <text x="204" y="14" fill="#b45309">Med</text>
+
+            <circle cx="250" cy="11" r="5" fill="#bbf7d0" stroke="#16a34a"/>
+            <text x="259" y="14" fill="#15803d">High (80%+)</text>
+
+            <text x="0" y="36" fill="#475569">All 3 modes (Practice, Flow, Exams) update these cells</text>
+            <text x="0" y="52" fill="#475569">directly via PostgreSQL <tspan font-family="var(--font-mono)">user_progress</tspan> increments.</text>
+          </g>
+        </g>
+
+        <!-- ========================================================================================= -->
+        <!-- HORIZONTAL LEGEND STRIP (Bottom, 4px Grid Aligned)                                        -->
+        <!-- ========================================================================================= -->
+
+        <g id="legend" transform="translate(30, 655)">
+          <rect width="1080" height="52" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+          
+          <text x="20" y="31" font-family="var(--font-mono)" font-size="11" font-weight="600" fill="#64748b" letter-spacing="0.08em">LEGEND &amp; PIPELINES:</text>
+
+          <!-- Legend Item 1 -->
+          <circle cx="195" cy="26" r="5.5" fill="#2563eb"/>
+          <text x="208" y="30" font-family="var(--font-sans)" font-size="11" font-weight="500" fill="#1e293b">Mode 1: Practice Session</text>
+
+          <!-- Legend Item 2 -->
+          <circle cx="375" cy="26" r="5.5" fill="#d97706"/>
+          <text x="388" y="30" font-family="var(--font-sans)" font-size="11" font-weight="500" fill="#1e293b">Mode 2: Adaptive Flow</text>
+
+          <!-- Legend Item 3 -->
+          <circle cx="550" cy="26" r="5.5" fill="#dc2626"/>
+          <text x="563" y="30" font-family="var(--font-sans)" font-size="11" font-weight="500" fill="#1e293b">Mode 3: Create Paper</text>
+
+          <!-- Legend Item 4 -->
+          <circle cx="715" cy="26" r="5.5" fill="#16a34a"/>
+          <text x="728" y="30" font-family="var(--font-sans)" font-size="11" font-weight="500" fill="#1e293b">Neon DB Persistence</text>
+
+          <!-- Legend Item 5 -->
+          <circle cx="880" cy="26" r="5.5" fill="#7c3aed"/>
+          <text x="893" y="30" font-family="var(--font-sans)" font-size="11" font-weight="500" fill="#1e293b">Home Matrix Progress (1/20)</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

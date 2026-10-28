@@ -49,7 +49,9 @@ export default function LandingPage() {
         <FeaturesWithPanel />
 
         {/* Social Proof & Testimonials */}
-        <Testimonials />
+        <div id="testimonials">
+          <Testimonials />
+        </div>
 
         {/* Pricing Plans (Target of "Pricing" navbar link) */}
         <div id="pricing">

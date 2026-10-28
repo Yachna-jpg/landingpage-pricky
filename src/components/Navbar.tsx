@@ -12,6 +12,26 @@ interface NavbarProps {
 export default function Navbar({ onOpenLeadModal }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  const [loginUrl, setLoginUrl] = useState('http://localhost:3000/login')
+
+  React.useEffect(() => {
+    if (process.env.NEXT_PUBLIC_LOGIN_URL) {
+      setLoginUrl(process.env.NEXT_PUBLIC_LOGIN_URL)
+    } else if (process.env.NEXT_PUBLIC_APP_URL) {
+      setLoginUrl(`${process.env.NEXT_PUBLIC_APP_URL}/login`)
+    } else if (typeof window !== 'undefined') {
+      const isLocal =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname.endsWith('.local')
+      if (isLocal) {
+        setLoginUrl('http://localhost:3000/login')
+      } else {
+        setLoginUrl('https://app.prickyai.com/login')
+      }
+    }
+  }, [])
+
   return (
     <header
       style={{
@@ -115,31 +135,39 @@ export default function Navbar({ onOpenLeadModal }: NavbarProps) {
           }}
           className="desktop-actions"
         >
-          <button
-            onClick={() => onOpenLeadModal('Navbar Sign In')}
+          <a
+            href={loginUrl}
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '13.5px',
               fontWeight: 500,
               color: 'var(--text-muted)',
               transition: 'color 0.15s',
+              cursor: 'pointer',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-main)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
           >
             Sign In
-          </button>
+          </a>
 
-          <button
-            onClick={() => onOpenLeadModal('Navbar Free Revision')}
+          <a
+            href={loginUrl}
             className="btn-minimal-dark"
             style={{
               padding: '12px 24px',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
             }}
           >
             Start Free Revision <ArrowUpRight size={15} />
-          </button>
+          </a>
         </div>
 
         {/* Mobile menu trigger */}
@@ -197,17 +225,30 @@ export default function Navbar({ onOpenLeadModal }: NavbarProps) {
           >
             Blogs
           </a>
+          <a
+            href={loginUrl}
+            onClick={() => setMobileOpen(false)}
+            style={{ fontSize: '18px', fontFamily: 'var(--font-serif)', color: 'var(--text-main)', textDecoration: 'none' }}
+          >
+            Sign In
+          </a>
           <div style={{ height: '1px', backgroundColor: 'var(--border-hairline)', margin: '8px 0' }} />
-          <button
-            onClick={() => {
-              setMobileOpen(false)
-              onOpenLeadModal('Mobile Start Revision')
-            }}
+          <a
+            href={loginUrl}
+            onClick={() => setMobileOpen(false)}
             className="btn-minimal-dark"
-            style={{ justifyContent: 'center', width: '100%', padding: '14px' }}
+            style={{
+              justifyContent: 'center',
+              width: '100%',
+              padding: '14px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+            }}
           >
             Start Free Revision <ArrowUpRight size={16} />
-          </button>
+          </a>
         </div>
       )}
 

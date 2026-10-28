@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 .pnp
 .pnp.js
@@ -35,12 +35,13 @@ src/app/(payload)/media/
 # CRM / Local Data Files
 crm-leads.json
 
-# Video and Large Media Files
-*.mp4
-*.webm
-*.mov
+# Video and Large Media Files (Root level or temp zips)
 *.zip
 *.tar.gz
+# Ignore raw videos outside public
+/*.mp4
+/*.webm
+/*.mov
 
 # OS and Editor
 .DS_Store

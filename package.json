@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@payloadcms/db-sqlite": "^3.92.0",
+    "@payloadcms/db-sqlite": "^3.91.0",
     "@payloadcms/next": "^3.91.0",
     "@payloadcms/richtext-lexical": "^3.91.0",
     "clsx": "^2.1.1",
